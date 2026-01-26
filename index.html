@@ -4,42 +4,112 @@
   <title>Abulu Pokédex</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #e6f7ff;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: #a0e6ff; /* light sky blue like Pokémon world */
       text-align: center;
+      margin: 0;
+      padding: 0;
     }
-    h1 { color: #0b3d91; }
+
+    h1 {
+      color: #ffcb05; /* Pokémon yellow */
+      text-shadow: 2px 2px #3b4cca; /* deep blue shadow for Pokémon style */
+      padding: 20px;
+      margin: 0;
+    }
+
+    .pokedex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+
     .card {
-      background: white;
-      border-radius: 12px;
-      padding: 12px;
+      background: linear-gradient(145deg, #fff8dc, #f5f5dc); /* cream Pokédex cards */
+      border-radius: 20px;
+      padding: 15px;
       margin: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      width: 180px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .pokemon-image {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+
+    .type {
+      font-weight: bold;
+      color: #3b4cca; /* dark blue Pokémon color */
+    }
+
+    .whos-that {
+      background: #ff0000; /* red silhouette card */
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      color: #ff0000;
+      font-weight: bold;
+      margin: 0 10px;
+    }
+
+    a:hover {
+      color: #ffa500;
     }
   </style>
 </head>
 <body>
 
 <h1>📘 Abulu Region Pokédex</h1>
-<div id="pokedex"></div>
 
-<script>
-const pokemon = [
-  { name: "Oreo", type: "Ice", body: "Small chubby penguin Pokémon." },
-  { name: "Oremperor", type: "Ice/Fighting", body: "Tall emperor penguin with ice crown." },
-  { name: "Frostell", type: "Ice/Dark", body: "Slim fox Pokémon with ice claws." },
-  { name: "Bushii", type: "Grass/Normal", body: "Tiny Pokémon that jumps from bushes." }
-];
+<div class="pokedex">
+  <div class="card">
+    <h2>Oreo</h2>
+    <img class="pokemon-image" src="oreo.png" alt="Oreo">
+    <div class="type">Type: Ice</div>
+    <p>Small chubby penguin Pokémon.</p>
+  </div>
 
-const pokedex = document.getElementById("pokedex");
+  <div class="card">
+    <h2>Oremperor</h2>
+    <img class="pokemon-image" src="oremperor.png" alt="Oremperor">
+    <div class="type">Type: Ice/Fighting</div>
+    <p>Tall emperor penguin with ice crown.</p>
+  </div>
 
-pokemon.forEach(p => {
-  const card = document.createElement("div");
-  card.className = "card";
-  card.innerHTML = `<h2>${p.name}</h2><b>Type:</b> ${p.type}<br><p>${p.body}</p>`;
-  pokedex.appendChild(card);
-});
-</script>
+  <div class="card whos-that">
+    <h2>Who's That Pokémon?</h2>
+    <img class="pokemon-image" src="mystery.png" alt="Mystery Pokémon">
+  </div>
+
+  <div class="card">
+    <h2>Bushii</h2>
+    <img class="pokemon-image" src="bushii.png" alt="Bushii">
+    <div class="type">Type: Grass/Normal</div>
+    <p>Tiny Pokémon that jumps from bushes.</p>
+  </div>
+
+  <div class="card">
+    <h2>Frostell</h2>
+    <img class="pokemon-image" src="frostell.png" alt="Frostell">
+    <div class="type">Type: Ice/Dark</div>
+    <p>Slim fox Pokémon with ice claws.</p>
+  </div>
+</div>
+
+<h2>Episodes</h2>
+<a href="episode1.html">Episode 1</a> | 
+<a href="episode2.html">Episode 2</a>
 
 </body>
 </html>
