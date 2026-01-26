@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Abulu Pokédex</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e6f7ff;
+      text-align: center;
+    }
+    h1 { color: #0b3d91; }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<h1>📘 Abulu Region Pokédex</h1>
+<div id="pokedex"></div>
+
+<script>
+const pokemon = [
+  { name: "Oreo", type: "Ice", body: "Small chubby penguin Pokémon." },
+  { name: "Oremperor", type: "Ice/Fighting", body: "Tall emperor penguin with ice crown." },
+  { name: "Frostell", type: "Ice/Dark", body: "Slim fox Pokémon with ice claws." },
+  { name: "Bushii", type: "Grass/Normal", body: "Tiny Pokémon that jumps from bushes." }
+];
+
+const pokedex = document.getElementById("pokedex");
+
+pokemon.forEach(p => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<h2>${p.name}</h2><b>Type:</b> ${p.type}<br><p>${p.body}</p>`;
+  pokedex.appendChild(card);
+});
+</script>
+
+</body>
+</html>
