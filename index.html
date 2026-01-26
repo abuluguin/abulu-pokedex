@@ -1,115 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Abulu Pokédex</title>
+  <title>Abulu Interactive Pokédex</title>
   <style>
     body {
       font-family: "Comic Sans MS", cursive, sans-serif;
-      background: #a0e6ff; /* light sky blue like Pokémon world */
+      background: #a0e6ff;
       text-align: center;
-      margin: 0;
-      padding: 0;
     }
-
     h1 {
-      color: #ffcb05; /* Pokémon yellow */
-      text-shadow: 2px 2px #3b4cca; /* deep blue shadow for Pokémon style */
-      padding: 20px;
-      margin: 0;
-    }
-
-    .pokedex {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      color: #ffcb05;
+      text-shadow: 2px 2px #3b4cca;
       padding: 20px;
     }
-
-    .card {
-      background: linear-gradient(145deg, #fff8dc, #f5f5dc); /* cream Pokédex cards */
+    .pokemon-card {
+      background: linear-gradient(145deg, #fff8dc, #f5f5dc);
       border-radius: 20px;
       padding: 15px;
-      margin: 10px;
+      margin: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      width: 180px;
+      display: inline-block;
+      width: 200px;
+      cursor: pointer;
       transition: transform 0.2s;
     }
-
-    .card:hover {
+    .pokemon-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
-
-    .pokemon-image {
+    .pokemon-name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #3b4cca;
+    }
+    .pokemon-info {
+      display: none;
+      margin-top: 10px;
+      text-align: left;
+    }
+    .pokemon-info img {
       width: 100px;
       height: 100px;
-      margin-bottom: 10px;
-    }
-
-    .type {
-      font-weight: bold;
-      color: #3b4cca; /* dark blue Pokémon color */
-    }
-
-    .whos-that {
-      background: #ff0000; /* red silhouette card */
-      color: white;
-    }
-
-    a {
-      text-decoration: none;
-      color: #ff0000;
-      font-weight: bold;
-      margin: 0 10px;
-    }
-
-    a:hover {
-      color: #ffa500;
+      display: block;
+      margin: 0 auto;
     }
   </style>
 </head>
 <body>
 
-<h1>📘 Abulu Region Pokédex</h1>
+<h1>📘 Abulu Interactive Pokédex</h1>
 
-<div class="pokedex">
-  <div class="card">
-    <h2>Oreo</h2>
-    <img class="pokemon-image" src="oreo.png" alt="Oreo">
-    <div class="type">Type: Ice</div>
+<div class="pokemon-card" onclick="toggleInfo('oreo-info')">
+  <div class="pokemon-name">Oreo</div>
+  <div class="pokemon-info" id="oreo-info">
+    <img src="oreo.png" alt="Oreo">
+    <b>Type:</b> Ice<br>
     <p>Small chubby penguin Pokémon.</p>
-  </div>
-
-  <div class="card">
-    <h2>Oremperor</h2>
-    <img class="pokemon-image" src="oremperor.png" alt="Oremperor">
-    <div class="type">Type: Ice/Fighting</div>
-    <p>Tall emperor penguin with ice crown.</p>
-  </div>
-
-  <div class="card whos-that">
-    <h2>Who's That Pokémon?</h2>
-    <img class="pokemon-image" src="mystery.png" alt="Mystery Pokémon">
-  </div>
-
-  <div class="card">
-    <h2>Bushii</h2>
-    <img class="pokemon-image" src="bushii.png" alt="Bushii">
-    <div class="type">Type: Grass/Normal</div>
-    <p>Tiny Pokémon that jumps from bushes.</p>
-  </div>
-
-  <div class="card">
-    <h2>Frostell</h2>
-    <img class="pokemon-image" src="frostell.png" alt="Frostell">
-    <div class="type">Type: Ice/Dark</div>
-    <p>Slim fox Pokémon with ice claws.</p>
   </div>
 </div>
 
-<h2>Episodes</h2>
-<a href="episode1.html">Episode 1</a> | 
-<a href="episode2.html">Episode 2</a>
+<div class="pokemon-card" onclick="toggleInfo('oremperor-info')">
+  <div class="pokemon-name">Oremperor</div>
+  <div class="pokemon-info" id="oremperor-info">
+    <img src="oremperor.png" alt="Oremperor">
+    <b>Type:</b> Ice/Fighting<br>
+    <p>Tall emperor penguin with ice crown.</p>
+  </div>
+</div>
+
+<div class="pokemon-card" onclick="toggleInfo('bushii-info')">
+  <div class="pokemon-name">Bushii</div>
+  <div class="pokemon-info" id="bushii-info">
+    <img src="bushii.png" alt="Bushii">
+    <b>Type:</b> Grass/Normal<br>
+    <p>Tiny Pokémon that jumps from bushes.</p>
+  </div>
+</div>
+
+<script>
+function toggleInfo(id) {
+  const info = document.getElementById(id);
+  if (info.style.display === "block") {
+    info.style.display = "none";
+  } else {
+    info.style.display = "block";
+  }
+}
+</script>
 
 </body>
 </html>
