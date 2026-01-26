@@ -91,13 +91,37 @@
   </style>
 </head>
 <body>
-  <script>
+  <!-- Made by popup -->
+<div id="credits" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffcb05;
+  color: #3b4cca;
+  border: 4px solid #3b4cca;
+  border-radius: 20px;
+  padding: 20px;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  z-index: 1000;
+">
+  <h3>✨ Poké Abulu was made with ❤️ by Abdullah & ChatGPT! ✨</h3>
+  <p>We created this Pokémon world together — enjoy exploring!</p>
+  <button onclick="document.getElementById('credits').style.display='none'" 
+          style="padding:10px 20px; font-size:16px; border-radius:10px; cursor:pointer;">
+    Close
+  </button>
+</div>
+
+<script>
+  // Automatically hide the popup after 7 seconds
   window.addEventListener('load', () => {
     setTimeout(() => {
-      document.getElementById('credits').style.display = 'none';
+      const el = document.getElementById('credits');
+      if(el) el.style.display = 'none';
     }, 7000); // 7000ms = 7 seconds
   });
-  </script>
+</script>
 
 <h1>📘 Abulu Interactive Pokédex</h1>
 
