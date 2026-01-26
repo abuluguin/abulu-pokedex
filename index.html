@@ -152,15 +152,39 @@
     }
 
     // Pokémon card info
-    function showInfo(name) {
-      let msg = '';
-      switch(name) {
-        case 'Oreo': msg = 'Oreo: Ice/Penguin Pokémon! ❄️🐧'; break;
-        case 'Pikachu': msg = 'Pikachu: Electric-type! ⚡'; break;
-        default: msg = 'This Pokémon is not added yet!';
-      }
-      alert(msg);
-    }
+    <!-- Custom Pokémon Cards -->
+<div style="text-align:center; margin-top:20px;">
+  <div class="pokemon-card" onclick="showInfo('Oreo')">
+    <img src="oreo.png" alt="Oreo">
+    <p>Oreo ❄️🐧</p>
+  </div>
+  <div class="pokemon-card" onclick="showInfo('Frostile')">
+    <img src="frostile.png" alt="Frostile">
+    <p>Frostile ❄️</p>
+  </div>
+  <div class="pokemon-card" onclick="showInfo('Bushii')">
+    <img src="bushii.png" alt="Bushii">
+    <p>Bushii 🔥</p>
+  </div>
+  <div class="pokemon-card" onclick="showInfo('Oremperor')">
+    <img src="oremporor.png" alt="Oremperor">
+    <p>Oremperor ❄️👑</p>
+  </div>
+</div>
+
+<script>
+function showInfo(name) {
+  let msg = '';
+  switch(name) {
+    case 'Oreo': msg = 'Oreo: Ice/Penguin Pokémon! ❄️🐧'; break;
+    case 'Frostile': msg = 'Frostile: Ice Pokémon, evolution of Oreo! ❄️'; break;
+    case 'Bushii': msg = 'Bushii: Fire-type Pokémon! 🔥'; break;
+    case 'Oremperor': msg = 'Oremperor: Final evolution of Oreo, Ice/Glacier type! ❄️👑'; break;
+    default: msg = 'This Pokémon is not added yet!';
+  }
+  alert(msg);
+}
+</script>
 
     // Snowflakes and Pokéballs
     window.addEventListener('load', () => {
