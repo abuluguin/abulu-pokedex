@@ -5,43 +5,84 @@
   <style>
     body {
       font-family: "Comic Sans MS", cursive, sans-serif;
-      background: #a0e6ff;
+      background: #2b2b5e; /* dark blue for night-sky effect */
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
       text-align: center;
     }
+
     h1 {
       color: #ffcb05;
       text-shadow: 2px 2px #3b4cca;
       padding: 20px;
     }
+
+    .pokedex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
     .pokemon-card {
       background: linear-gradient(145deg, #fff8dc, #f5f5dc);
       border-radius: 20px;
       padding: 15px;
       margin: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      display: inline-block;
       width: 200px;
       cursor: pointer;
       transition: transform 0.2s;
+      position: relative;
+      z-index: 2;
     }
+
     .pokemon-card:hover {
       transform: scale(1.05);
     }
+
     .pokemon-name {
       font-size: 24px;
       font-weight: bold;
       color: #3b4cca;
     }
+
     .pokemon-info {
       display: none;
       margin-top: 10px;
       text-align: left;
     }
+
     .pokemon-info img {
       width: 100px;
       height: 100px;
       display: block;
       margin: 0 auto;
+    }
+
+    /* Snowflake style */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 12px;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Pokéballs */
+    .pokeball {
+      position: fixed;
+      top: -50px;
+      font-size: 20px;
+      color: red;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -49,30 +90,50 @@
 
 <h1>📘 Abulu Interactive Pokédex</h1>
 
-<div class="pokemon-card" onclick="toggleInfo('oreo-info')">
-  <div class="pokemon-name">Oreo</div>
-  <div class="pokemon-info" id="oreo-info">
-    <img src="oreo.png" alt="Oreo">
-    <b>Type:</b> Ice<br>
-    <p>Small chubby penguin Pokémon.</p>
+<div class="pokedex">
+  <div class="pokemon-card" onclick="toggleInfo('oreo-info')">
+    <div class="pokemon-name">Oreo</div>
+    <div class="pokemon-info" id="oreo-info">
+      <img src="oreo.png" alt="Oreo">
+      <b>Type:</b> Ice<br>
+      <p>Small chubby penguin Pokémon.</p>
+    </div>
   </div>
-</div>
 
-<div class="pokemon-card" onclick="toggleInfo('oremperor-info')">
-  <div class="pokemon-name">Oremperor</div>
-  <div class="pokemon-info" id="oremperor-info">
-    <img src="oremperor.png" alt="Oremperor">
-    <b>Type:</b> Ice/Fighting<br>
-    <p>Tall emperor penguin with ice crown.</p>
+  <div class="pokemon-card" onclick="toggleInfo('oremperor-info')">
+    <div class="pokemon-name">Oremperor</div>
+    <div class="pokemon-info" id="oremperor-info">
+      <img src="oremperor.png" alt="Oremperor">
+      <b>Type:</b> Ice/Fighting<br>
+      <p>Tall emperor penguin with ice crown.</p>
+    </div>
   </div>
-</div>
 
-<div class="pokemon-card" onclick="toggleInfo('bushii-info')">
-  <div class="pokemon-name">Bushii</div>
-  <div class="pokemon-info" id="bushii-info">
-    <img src="bushii.png" alt="Bushii">
-    <b>Type:</b> Grass/Normal<br>
-    <p>Tiny Pokémon that jumps from bushes.</p>
+  <div class="pokemon-card" onclick="toggleInfo('bushii-info')">
+    <div class="pokemon-name">Bushii</div>
+    <div class="pokemon-info" id="bushii-info">
+      <img src="bushii.png" alt="Bushii">
+      <b>Type:</b> Grass/Normal<br>
+      <p>Tiny Pokémon that jumps from bushes.</p>
+    </div>
+  </div>
+
+  <div class="pokemon-card" onclick="toggleInfo('frostell-info')">
+    <div class="pokemon-name">Frostell</div>
+    <div class="pokemon-info" id="frostell-info">
+      <img src="frostell.png" alt="Frostell">
+      <b>Type:</b> Ice/Dark<br>
+      <p>Slim fox Pokémon with ice claws.</p>
+    </div>
+  </div>
+
+  <div class="pokemon-card" onclick="toggleInfo('missing-info')">
+    <div class="pokemon-name">???</div>
+    <div class="pokemon-info" id="missing-info">
+      <img src="missing.png" alt="Missing Pokémon">
+      <b>Type:</b> ???<br>
+      <p>Design TBD.</p>
+    </div>
   </div>
 </div>
 
@@ -85,4 +146,50 @@ function toggleInfo(id) {
     info.style.display = "block";
   }
 }
-  
+
+// Snow falling
+function createSnowflake() {
+  const snowflake = document.createElement('div');
+  snowflake.className = 'snowflake';
+  snowflake.style.left = Math.random() * window.innerWidth + 'px';
+  snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+  snowflake.innerHTML = '❄';
+  document.body.appendChild(snowflake);
+
+  let top = -10;
+  const fall = setInterval(() => {
+    top += 2;
+    snowflake.style.top = top + 'px';
+    if (top > window.innerHeight) {
+      clearInterval(fall);
+      snowflake.remove();
+    }
+  }, 30);
+}
+
+setInterval(createSnowflake, 300);
+
+// Floating Pokéballs
+function createPokeball() {
+  const ball = document.createElement('div');
+  ball.className = 'pokeball';
+  ball.style.left = Math.random() * window.innerWidth + 'px';
+  ball.innerHTML = '⚪'; // you can replace with Pokéball emoji or image
+  document.body.appendChild(ball);
+
+  let top = -50;
+  const fall = setInterval(() => {
+    top += 3;
+    ball.style.top = top + 'px';
+    if (top > window.innerHeight) {
+      clearInterval(fall);
+      ball.remove();
+    }
+  }, 30);
+}
+
+setInterval(createPokeball, 1000);
+
+</script>
+</body>
+</html>
