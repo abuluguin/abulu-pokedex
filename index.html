@@ -1,219 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Poké Abulu – Explore Pokémon!</title>
-  <meta name="description" content="Explore Pokémon, interactive cards, episodes, and more on Poké Abulu – built by Abdullah & ChatGPT!">
+<title>Poké Abulu</title>
+<meta name="description" content="Poké Abulu – Custom Pokémon world by Abulu & ChatGPT">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="192x192" href="pokelogo.png">
-  <link rel="apple-touch-icon" href="pokelogo.png">
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="192x192" href="pokelogo.png">
+<link rel="apple-touch-icon" href="pokelogo.png">
 
-  <style>
-    /* Global Styles */
-    body {
-      margin: 0;
-      font-family: 'Comic Sans MS', cursive;
-      background: linear-gradient(to bottom, #cce7ff, #ffffff);
-      overflow-x: hidden;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(to bottom, #cce7ff, #ffffff);
+  overflow-x: hidden;
+  text-align: center;
+}
 
-    /* Logo */
-    #logo {
-      display: block;
-      margin: 20px auto;
-      width: 150px;
-    }
+/* Header */
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
 
-    /* Snowflake animation */
-    .snowflake {
-      position: fixed;
-      top: -10px;
-      color: white;
-      font-size: 1.2em;
-      z-index: 999;
-      user-select: none;
-      pointer-events: none;
-      animation: fall linear infinite;
-    }
-    @keyframes fall {
-      0% {transform: translateY(0);}
-      100% {transform: translateY(100vh);}
-    }
+#logo {
+  width: 140px;
+}
 
-    /* Pokéball style */
-    .pokeball {
-      position: fixed;
-      width: 50px;
-      height: 50px;
-      background: radial-gradient(circle at center, #fff 50%, #f00 50%);
-      border-radius: 50%;
-      border: 3px solid black;
-      z-index: 0;
-      opacity: 0.3;
-    }
+#chatgptlogo {
+  width: 60px;
+}
 
-    /* Pokémon card */
-    .pokemon-card {
-      display: inline-block;
-      width: 160px;
-      margin: 15px;
-      padding: 10px;
-      border: 3px solid #3b4cca;
-      border-radius: 15px;
-      background: #fff3b0;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .pokemon-card:hover {
-      transform: scale(1.05);
-    }
-    .pokemon-card img {
-      width: 100px;
-      height: 100px;
-    }
+/* Pokémon cards */
+.pokemon-card {
+  display: inline-block;
+  width: 170px;
+  margin: 15px;
+  padding: 10px;
+  border: 4px solid #3b4cca;
+  border-radius: 18px;
+  background: #fff3b0;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-    /* Credits popup */
-    #credits {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ffcb05;
-      color: #3b4cca;
-      border: 4px solid #3b4cca;
-      border-radius: 20px;
-      padding: 20px;
-      font-family: 'Comic Sans MS', cursive;
-      text-align: center;
-      z-index: 1000;
-    }
+.pokemon-card:hover {
+  transform: scale(1.07);
+}
 
-    /* Play sound button */
-    #play-sound {
-      display: block;
-      margin: 10px auto;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background: #3b4cca;
-      color: white;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+.pokemon-card img {
+  width: 110px;
+  height: 110px;
+}
+
+/* Snow */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 1em;
+  user-select: none;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+
+/* Pokéballs */
+.pokeball {
+  position: fixed;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, white 45%, red 46%);
+  border: 3px solid black;
+  opacity: 0.25;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Logo -->
-  <img src="file_000000004e1071fa9fd9f0513813b218.png" alt="Poké Abulu Logo" id="logo">
+<!-- HEADER LOGOS -->
+<div id="header">
+  <img src="pokelogo.png" id="logo" alt="Poké Abulu Logo">
+  <img src="chatgpt.png" id="chatgptlogo" alt="ChatGPT Logo">
+</div>
 
-  <!-- Play Sound -->
-  <audio id="open-sound">
-    <source src="Oreo.mp3" type="audio/mpeg">
-    Your browser does not support audio.
-  </audio>
-  <button id="play-sound" onclick="playSound()">🔊 Play Sound</button>
+<h2>❄️🔥 Welcome to Poké Abulu 🔥❄️</h2>
 
-  <!-- Pokémon Cards -->
-  <div style="text-align:center; margin-top:20px;">
-    <div class="pokemon-card" onclick="showInfo('Oreo')">
-      <img src="oreo.png" alt="Oreo">
-      <p>Oreo ❄️🐧</p>
-    </div>
-    <div class="pokemon-card" onclick="showInfo('Pikachu')">
-      <img src="pikachu.png" alt="Pikachu">
-      <p>Pikachu ⚡</p>
-    </div>
-    <!-- Add more Pokémon cards here -->
-  </div>
+<!-- SOUND -->
+<audio id="open-sound">
+  <source src="Oreo.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- Credits Popup -->
-  <div id="credits">
-    <h3>✨ Poké Abulu was made with ❤️ by Abdullah & ChatGPT! ✨</h3>
-    <p>We created this Pokémon world together — enjoy exploring!</p>
-    <button onclick="document.getElementById('credits').style.display='none'" 
-            style="padding:10px 20px; font-size:16px; border-radius:10px; cursor:pointer;">
-      Close
-    </button>
+<p>(Tap anywhere to start sound 🎵)</p>
+
+<!-- CUSTOM POKÉMON -->
+<div>
+
+  <div class="pokemon-card" onclick="showInfo('oreo')">
+    <img src="oreo.png">
+    <h3>Oreo ❄️🐧</h3>
   </div>
 
-  <script>
-    // Sound logic
-    let soundPlayed = false;
-    function playSound() {
-      const sound = document.getElementById('open-sound');
-      if(!soundPlayed) {
-        sound.play();
-        soundPlayed = true;
-      }
-    }
+  <div class="pokemon-card" onclick="showInfo('frostell')">
+    <img src="frostell.png">
+    <h3>Frostell ❄️</h3>
+  </div>
 
-    // Pokémon card info
-    <!-- Custom Pokémon Cards -->
-<div style="text-align:center; margin-top:20px;">
-  <div class="pokemon-card" onclick="showInfo('Oreo')">
-    <img src="oreo.png" alt="Oreo">
-    <p>Oreo ❄️🐧</p>
+  <div class="pokemon-card" onclick="showInfo('bushii')">
+    <img src="bushii.png">
+    <h3>Bushii 🔥</h3>
   </div>
-  <div class="pokemon-card" onclick="showInfo('Frostile')">
-    <img src="frostile.png" alt="Frostile">
-    <p>Frostile ❄️</p>
+
+  <div class="pokemon-card" onclick="showInfo('oremperor')">
+    <img src="oremperor.png">
+    <h3>Oremperor ❄️👑</h3>
   </div>
-  <div class="pokemon-card" onclick="showInfo('Bushii')">
-    <img src="bushii.png" alt="Bushii">
-    <p>Bushii 🔥</p>
-  </div>
-  <div class="pokemon-card" onclick="showInfo('Oremperor')">
-    <img src="oremporor.png" alt="Oremperor">
-    <p>Oremperor ❄️👑</p>
-  </div>
+
 </div>
 
 <script>
-function showInfo(name) {
-  let msg = '';
-  switch(name) {
-    case 'Oreo': msg = 'Oreo: Ice/Penguin Pokémon! ❄️🐧'; break;
-    case 'Frostile': msg = 'Frostile: Ice Pokémon, evolution of Oreo! ❄️'; break;
-    case 'Bushii': msg = 'Bushii: Fire-type Pokémon! 🔥'; break;
-    case 'Oremperor': msg = 'Oremperor: Final evolution of Oreo, Ice/Glacier type! ❄️👑'; break;
-    default: msg = 'This Pokémon is not added yet!';
+/* Play sound once */
+let played = false;
+document.body.addEventListener("click", () => {
+  if(!played){
+    document.getElementById("open-sound").play();
+    played = true;
   }
-  alert(msg);
+});
+
+/* Pokémon info */
+function showInfo(p){
+  let text = "";
+  if(p=="oreo") text="Oreo – Ice/Penguin Pokémon ❄️🐧";
+  if(p=="frostell") text="Frostell – Ice Pokémon, evolution of Oreo ❄️";
+  if(p=="bushii") text="Bushii – Fire Pokémon 🔥";
+  if(p=="oremperor") text="Oremperor – Emperor of Ice, final evolution ❄️👑";
+  alert(text);
+}
+
+/* Snow */
+for(let i=0;i<35;i++){
+  let s=document.createElement("div");
+  s.className="snowflake";
+  s.innerHTML="❄";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=5+Math.random()*6+"s";
+  s.style.fontSize=10+Math.random()*20+"px";
+  document.body.appendChild(s);
+}
+
+/* Pokéballs */
+for(let i=0;i<6;i++){
+  let p=document.createElement("div");
+  p.className="pokeball";
+  p.style.left=Math.random()*90+"vw";
+  p.style.top=Math.random()*90+"vh";
+  document.body.appendChild(p);
 }
 </script>
 
-    // Snowflakes and Pokéballs
-    window.addEventListener('load', () => {
-      // Snowflakes
-      for(let i=0; i<30; i++){
-        const snow = document.createElement('div');
-        snow.className = 'snowflake';
-        snow.style.left = Math.random()*100 + 'vw';
-        snow.style.animationDuration = (5 + Math.random()*5) + 's';
-        snow.style.fontSize = (10 + Math.random()*20) + 'px';
-        snow.innerHTML = '❄';
-        document.body.appendChild(snow);
-      }
-
-      // Pokéballs
-      for(let i=0; i<5; i++){
-        const pokeball = document.createElement('div');
-        pokeball.className = 'pokeball';
-        pokeball.style.top = Math.random()*80 + 'vh';
-        pokeball.style.left = Math.random()*80 + 'vw';
-        document.body.appendChild(pokeball);
-      }
-
-      // Hide credits after 7 seconds
-      setTimeout(() => {
-        const el = document.getElementById('credits');
-        if(el) el.style.display = 'none';
-      }, 7000);
-    });
-  </script>
 </body>
-</html>            
+</html>    
