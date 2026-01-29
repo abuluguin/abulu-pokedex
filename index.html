@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+.pokemon-card {
+  background: #111;
+  border: 2px solid #ff6a00;
+  border-radius: 16px;
+  padding: 15px;
+  margin: 15px;
+  max-width: 320px;
+  box-shadow: 0 0 12px rgba(255,106,0,0.6);
+}
+
+.pokemon-card h2 {
+  color: #ff9a2f;
+  text-align: center;
+}
+
+.poke-img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+  </style>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MY9TRMZ2T"></script>
 <script>
@@ -141,6 +163,21 @@ body {
 
 <!-- CUSTOM POKÉMON -->
 <div>
+  <div class="pokemon-card">
+  <h2>🔥 Lilroar</h2>
+  <img src="lilroar.png" alt="Lilroar Pokémon" class="poke-img">
+
+  <p><strong>Type:</strong> Fire</p>
+  <p><strong>Category:</strong> Little Roar Pokémon</p>
+
+  <p>
+    Lilroar is a small lion-like Pokémon found near rivers and warm routes.
+    Although weak and playful, its roar can suddenly flare into hot flames.
+    When injured, it becomes very quiet and hides until someone helps it.
+  </p>
+
+  <p><strong>First appearance:</strong> Episode 3 – River Encounter</p>
+  </div>
 
   <div class="pokemon-card" onclick="showInfo('oreo')">
     <img src="oreo.png">
