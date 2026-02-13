@@ -2,6 +2,47 @@
 <html lang="en">
 <head>
   <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #8B0000, #B22222, #FFD700);
+  background-attachment: fixed;
+  color: white;
+}
+
+/* CNY Banner */
+.cny-banner {
+  background: linear-gradient(90deg, #FFD700, #FF4500);
+  color: #8B0000;
+  text-align: center;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  animation: glow 2s infinite alternate;
+}
+
+/* Glow animation */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #FFD700;
+  }
+  to {
+    text-shadow: 0 0 15px #fff, 0 0 25px #FFD700;
+  }
+}
+
+/* Optional floating lantern effect */
+body::before {
+  content: "🏮 🧧 🐉 🏮 🧧 🐉";
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  opacity: 0.2;
+  pointer-events: none;
+}
 .pokemon-card {
   background: #111;
   border: 2px solid #ff6a00;
@@ -144,6 +185,12 @@ body {
 <div id="header">
   <img src="file_000000004e1071fa9fd9f0513813b218.png" id="logo" alt="Poké Abulu Logo">
   <img src="Chat-GPT-logo.webp" id="chatgptlogo" alt="ChatGPT Logo">
+</div>
+
+<div class="cny-banner">
+  🧧 Happy Chinese New Year from the Abulu Region! 🧧
+  <br>
+  May your journey be lucky and full of victories! 🐉✨
 </div>
 
 <h2>❄️🔥 Welcome to Poké Abulu 🔥❄️</h2>
