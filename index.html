@@ -187,6 +187,29 @@ body {
   <img src="Chat-GPT-logo.webp" id="chatgptlogo" alt="ChatGPT Logo">
 </div>
 
+  <audio id="cny-music" loop>
+  <source src="Adventure In Advetureland.mp3" type="audio/mpeg">
+  Your browser does not support audio.
+</audio>
+
+<button onclick="toggleCNYMusic()" id="cny-music-btn">
+  🎶 Play CNY Music
+</button>
+  <script>
+  const music = document.getElementById("cny-music");
+  const btn = document.getElementById("cny-music-btn");
+
+  function toggleCNYMusic() {
+    if (music.paused) {
+      music.play();
+      btn.textContent = "🔇 Stop CNY Music";
+    } else {
+      music.pause();
+      btn.textContent = "🎶 Play CNY Music";
+    }
+  }
+  </script>
+
 <div class="cny-banner">
   🧧 Happy Chinese New Year from the Abulu Region! 🧧
   <br>
