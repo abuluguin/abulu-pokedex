@@ -11,6 +11,42 @@
   <!-- Styles -->
   <style>
     body {
+  background: linear-gradient(to bottom, #0b0c3f, #1e1f5c); /* dark night sky */
+  color: #fff; /* keeps text readable */
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Moon */
+.moon {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at 30% 30%, #fff, #f0f0f0);
+  border-radius: 50%;
+  box-shadow: 0 0 30px #fff;
+  z-index: 0;
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.3; transform: scale(0.8); }
+}
+    
+    body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -91,6 +127,16 @@
   </style>
 </head>
 <body>
+  <!-- Moon -->
+<div class="moon"></div>
+
+<!-- Stars -->
+<div class="star" style="top:50px; left:100px;"></div>
+<div class="star" style="top:200px; left:300px;"></div>
+<div class="star" style="top:150px; left:500px;"></div>
+<div class="star" style="top:400px; left:700px;"></div>
+<div class="star" style="top:100px; left:900px;"></div>
+  
 
   <!-- Header -->
   <header>
@@ -98,10 +144,7 @@
     <div class="chatgpt-badge">ChatGPT</div>
   </header>
 
-  <!-- Banner -->
-  <div class="banner">
-    Happy Chinese New Year! 🧧
-  </div>
+  
 
   <!-- Title -->
   <h1>Welcome to Abulu Region!</h1>
