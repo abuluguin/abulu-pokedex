@@ -1,434 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poké Abulu - Custom Pokémon Region</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="abulu-logo.png">
+
+  <!-- Styles -->
   <style>
     body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #8B0000, #B22222, #FFD700);
-  background-attachment: fixed;
-  color: white;
-}
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('cny-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #222;
+    }
 
-/* CNY Banner */
-.cny-banner {
-  background: linear-gradient(90deg, #FFD700, #FF4500);
-  color: #8B0000;
-  text-align: center;
-  padding: 20px;
-  font-size: 22px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  animation: glow 2s infinite alternate;
-}
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #ffcc00;
+      padding: 10px 20px;
+    }
 
-/* Glow animation */
-@keyframes glow {
-  from {
-    text-shadow: 0 0 5px #fff, 0 0 10px #FFD700;
-  }
-  to {
-    text-shadow: 0 0 15px #fff, 0 0 25px #FFD700;
-  }
-}
+    header img {
+      height: 60px;
+    }
 
-/* Optional floating lantern effect */
-body::before {
-  content: "🏮 🧧 🐉 🏮 🧧 🐉";
-  position: fixed;
-  top: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 28px;
-  opacity: 0.2;
-  pointer-events: none;
-}
-.pokemon-card {
-  background: #111;
-  border: 2px solid #ff6a00;
-  border-radius: 16px;
-  padding: 15px;
-  margin: 15px;
-  max-width: 320px;
-  box-shadow: 0 0 12px rgba(255,106,0,0.6);
-}
+    header .chatgpt-badge {
+      font-weight: bold;
+      background-color: #00ccff;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
 
-.pokemon-card h2 {
-  color: #ff9a2f;
-  text-align: center;
-}
+    h1, h2 {
+      text-align: center;
+      margin: 20px 0;
+    }
 
-.poke-img {
-  width: 100%;
-  border-radius: 12px;
-  margin: 10px 0;
-}
+    #pokemon-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .pokemon-card {
+      width: 200px;
+      background-color: rgba(255,255,255,0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .pokemon-card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+    }
+
+    .pokemon-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 5px 0;
+    }
+
+    .version {
+      text-align: center;
+      margin: 20px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .banner {
+      text-align: center;
+      background-color: #ff4444;
+      color: white;
+      font-size: 20px;
+      padding: 10px;
+    }
+
   </style>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7MY9TRMZ2T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7MY9TRMZ2T');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Poké Abulu</title>
-<meta name="description" content="Poké Abulu – Custom Pokémon world by Abulu & ChatGPT">
-
-<!-- Favicon -->
-<link rel="icon" type="image/png" sizes="192x192" href="file_000000004e1071fa9fd9f0513813b218.png">
-<link rel="apple-touch-icon" href="file_000000004e1071fa9fd9f0513813b218.png">
-
-<style>
-  .version-badge {
-  display: inline-block;
-  background: #ffcb05;
-  color: #3b4cca;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-weight: bold;
-  margin: 10px auto;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-  }
-  .early-note {
-  background: #0d47a1;
-  color: white;
-  padding: 12px;
-  margin: 15px;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
-body {
-  margin: 0;
-  font-family: 'Comic Sans MS', cursive;
-  background: linear-gradient(to bottom, #cce7ff, #ffffff);
-  overflow-x: hidden;
-  text-align: center;
-}
-
-/* Header */
-#header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-#logo {
-  width: 140px;
-}
-
-#chatgptlogo {
-  width: 60px;
-}
-
-/* Pokémon cards */
-.pokemon-card {
-  display: inline-block;
-  width: 170px;
-  margin: 15px;
-  padding: 10px;
-  border: 4px solid #3b4cca;
-  border-radius: 18px;
-  background: #fff3b0;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.pokemon-card:hover {
-  transform: scale(1.07);
-}
-
-.pokemon-card img {
-  width: 110px;
-  height: 110px;
-}
-
-/* Snow */
-.snowflake {
-  position: fixed;
-  top: -10px;
-  color: white;
-  font-size: 1em;
-  user-select: none;
-  pointer-events: none;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  to { transform: translateY(110vh); }
-}
-
-/* Pokéballs */
-.pokeball {
-  position: fixed;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, white 45%, red 46%);
-  border: 3px solid black;
-  opacity: 0.25;
-}
-</style>
 </head>
-
 <body>
 
-<!-- HEADER LOGOS -->
-<div id="header">
-  <img src="file_000000004e1071fa9fd9f0513813b218.png" id="logo" alt="Poké Abulu Logo">
-  <img src="Chat-GPT-logo.webp" id="chatgptlogo" alt="ChatGPT Logo">
-</div>
+  <!-- Header -->
+  <header>
+    <img src="abulu-logo.png" alt="Poké Abulu Logo">
+    <div class="chatgpt-badge">ChatGPT</div>
+  </header>
 
-  <audio id="cny-music" loop>
-  <source src="Adventure in Advetureland.mp3" type="audio/mpeg">
-  Your browser does not support audio.
-</audio>
+  <!-- Banner -->
+  <div class="banner">
+    Happy Chinese New Year! 🧧
+  </div>
 
-<button onclick="toggleCNYMusic()" id="cny-music-btn">
-  🎶 Play CNY Music
-</button>
+  <!-- Title -->
+  <h1>Welcome to Abulu Region!</h1>
+  <h2>Poké Abulu Custom Pokémon</h2>
+
+  <!-- Pokémon List -->
+  <div id="pokemon-list"></div>
+
+  <!-- Website Version -->
+  <div class="version">Website Version: 1.0.0</div>
+
+  <!-- Script: Auto-generate Pokémon cards -->
   <script>
-  const music = document.getElementById("cny-music");
-  const btn = document.getElementById("cny-music-btn");
+    const pokemon = [
+      // Existing Pokémon
+      {name:"Oreo"},
+      {name:"Frostile"},
+      {name:"Bushii"},
+      {name:"Oremperor"},
+      {name:"Lilroar"},
+      {name:"Wobbuffet (Abulu Form)"},
 
-  function toggleCNYMusic() {
-    if (music.paused) {
-      music.play();
-      btn.textContent = "🔇 Stop CNY Music";
-    } else {
-      music.pause();
-      btn.textContent = "🎶 Play CNY Music";
-    }
-  }
+      // New Pokémon
+      {name:"Scopianarus"},
+      {name:"Dynamite"},
+      {name:"Granite", evo:"Evolve Form of Dynamite"},
+      {name:"Dragonite", evo:"Final Evolve Form of Dynamite"},
+      {name:"E-rex"},
+      {name:"Giga", evo:"Evolve Form of E-rex"},
+      {name:"Biriblue", evo:"Last Evolution of E-rex"},
+      {name:"Pacy", evo:"Carfo Evolve Form"},
+      {name:"Carfo"},
+      {name:"Yen"},
+      {name:"Apel"},
+      {name:"Coconut"},
+      {name:"Bantally"},
+      {name:"Paluky", evo:"Final Evolution of Bantally"},
+      {name:"Raffi"},
+      {name:"Bushking", evo:"Final Evolution of Bushii"}
+    ];
+
+    const list = document.getElementById("pokemon-list");
+
+    pokemon.forEach(p => {
+      list.innerHTML += `
+        <div class="pokemon-card">
+          <div class="pokemon-name">${p.name}</div>
+          ${p.evo ? `<p><strong>Evolution:</strong> ${p.evo}</p>` : ""}
+          <img src="https://via.placeholder.com/150x150?text=${encodeURIComponent(p.name)}" class="poke-img">
+        </div>
+      `;
+    });
   </script>
 
-<div class="cny-banner">
-  🧧 Happy Chinese New Year from the Abulu Region! 🧧
-  <br>
-  May your journey be lucky and full of victories! 🐉✨
-</div>
-
-<h2>❄️🔥 Welcome to Poké Abulu 🔥❄️</h2>
-  <div class="version-badge">
-  Poké Abulu — Version 0.1 (Early Development)
-  </div>
-  <div class="early-note">
-  🌱 This website is in early development! New custom Pokémon will keep appearing as we build the Abulu Region, the comic, and the Poké Abulu world.
-  </div>
-
-<!-- SOUND -->
-<audio id="open-sound">
-  <source src="" type="audio/mpeg">
-</audio>
-
-<p>(Tap anywhere to start sound 🎵)</p>
-
-<!-- CUSTOM POKÉMON -->
-  <!-- Wobbuffet (Abulu Form) -->
-<div class="pokemon-card">
-  <div class="pokemon-name">
-    Wobbuffet (Abulu Form)
-  </div>
-<h2>New Abulu Pokémon</h2>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Scopianarus</div>
-  <img src="scopianarus.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Dynamite</div>
-  <img src="dynamite.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Granite</div>
-  <p>Evolve Form of Dynamite</p>
-  <img src="granite.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Dragonite</div>
-  <p>Final Evolve Form of Dynamite</p>
-  <img src="dragonite-abulu.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">E-rex</div>
-  <img src="e-rex.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Giga</div>
-  <p>Evolve Form of E-rex</p>
-  <img src="giga.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Biriblue</div>
-  <p>Last Evolution of E-rex</p>
-  <img src="biriblue.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Pacy</div>
-  <p>Carfo Evolve Form</p>
-  <img src="pacy.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Carfo</div>
-  <img src="carfo.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Yen</div>
-  <img src="yen.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Apel</div>
-  <img src="apel.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Coconut</div>
-  <img src="coconut.png" class="poke-img">
-</div>
-
-<h2>Classic Abulu Pokémon</h2>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Bantally</div>
-  <img src="bantally.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Paluky</div>
-  <p>Final Evolution of Bantally</p>
-  <img src="<img src="https://via.placeholder.com/200x200?text=Scopianarus" class="poke-img">" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Raffi</div>
-  <img src="raffi.png" class="poke-img">
-</div>
-
-<div class="pokemon-card">
-  <div class="pokemon-name">Bushking</div>
-  <p>Final Evolution of Bushii</p>
-  <img src="bushking.png" class="poke-img">
-</div>
-
-  <img src="20260215_193004.jpg" alt="Wobbuffet Abulu Form" class="poke-img">
-
-  <div>
-    <span class="type grass">Grass</span>
-    <span class="type psychic">Psychic</span>
-  </div>
-
-  <p>
-    A mysterious regional form discovered in the forests of Abulu.
-    It stores damage energy within enchanted vines and releases it
-    in powerful natural bursts.
-  </p>
-
-  <p><strong>Ability:</strong> Nature Mirror</p>
-  <p><strong>Signature Move:</strong> Abulu Reversal</p>
-
-  <p><strong>First Appearance:</strong> Episode 3</p>
-</div>
-<div>
-  <div class="pokemon-card">
-  <h2>🔥 Lilroar</h2>
-  <img src="lilroar.png" alt="Lilroar Pokémon" class="poke-img">
-    First appearance: Episode 3 – River Encounter
-
-  <p><strong>Type:</strong> Fire</p>
-  <p><strong>Category:</strong> Little Roar Pokémon</p>
-
-  <p>
-    Lilroar is a small lion-like Pokémon found near rivers and warm routes.
-    Although weak and playful, its roar can suddenly flare into hot flames.
-    When injured, it becomes very quiet and hides until someone helps it.
-  </p>
-
-  <p><strong>First appearance:</strong> Episode 3 – River Encounter</p>
-  </div>
-
-  <div class="pokemon-card" onclick="showInfo('oreo')">
-    <img src="oreo.png">
-    <h3>Oreo ❄️🐧</h3>
-    First appearance: Episode 1 – Arrival in Abulu
-  </div>
-
-  <div class="pokemon-card" onclick="showInfo('frostell')">
-    <img src="frostell.png">
-    <h3>Frostell ❄️</h3>
-    First appearance: Episode 1 – Arrival in Abulu
-  </div>
-
-  <div class="pokemon-card" onclick="showInfo('bushii')">
-    <img src="bushii.png">
-    <h3>Bushii 🔥</h3>
-    First appearance: Episode 3 – River Encounter (Team Quartz debut)
-  </div>
-
-  <div class="pokemon-card" onclick="showInfo('oremperor')">
-    <img src="oremperor.png">
-    <h3>Oremperor ❄️👑</h3>
-  </div>
-
-</div>
-
-<script>
-/* Play sound once */
-let played = false;
-document.body.addEventListener("click", () => {
-  if(!played){
-    document.getElementById("open-sound").play();
-    played = true;
-  }
-});
-
-/* Pokémon info */
-function showInfo(p){
-  let text = "";
-  if(p=="oreo") text="Oreo – Ice/Penguin Pokémon ❄️🐧";
-  if(p=="frostell") text="Frostell – Ice Pokémon, evolution of Oreo ❄️";
-  if(p=="bushii") text="Bushii – Fire Pokémon 🔥";
-  if(p=="oremperor") text="Oremperor – Emperor of Ice, final evolution ❄️👑";
-  alert(text);
-}
-
-/* Snow */
-for(let i=0;i<35;i++){
-  let s=document.createElement("div");
-  s.className="snowflake";
-  s.innerHTML="❄";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=5+Math.random()*6+"s";
-  s.style.fontSize=10+Math.random()*20+"px";
-  document.body.appendChild(s);
-}
-
-/* Pokéballs */
-for(let i=0;i<6;i++){
-  let p=document.createElement("div");
-  p.className="pokeball";
-  p.style.left=Math.random()*90+"vw";
-  p.style.top=Math.random()*90+"vh";
-  document.body.appendChild(p);
-}
-</script>
-
 </body>
-</html>    
+</html>  
